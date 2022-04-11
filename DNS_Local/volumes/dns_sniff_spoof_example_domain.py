@@ -30,3 +30,9 @@ def spoof_dns(pkt):
 # Sniff UDP query packets and invoke spoof_dns().
 f = 'udp and dst port 53'
 pkt = sniff(iface='br-c86d56e79837', filter=f, prn=spoof_dns)      
+
+'''
+Both the example.com IP and ns.attacker32.com NS are cached in the Local DNS server's cache.
+When running dig again on example.com it will output 10.0.2.5, as previously cached.
+But if we run dig xyz.example (e.g) it will use the ns.attacker32.com NS cached, and the output will be 1.2.3.6.
+'''
