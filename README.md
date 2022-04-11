@@ -1,6 +1,6 @@
 # Network Security
 
-The following [Seed Labs](https://github.com/seed-labs/seed-labs) related to network security were explored:
+The following [Seed Labs](https://github.com/seed-labs/seed-labs) related to networks security were explored:
 
 | Lab                                                                                                                   | Corresponding Seed Lab              | Completed          |
 | ----------------------------------------------------------------------------------------------------------------------| ----------------------------------- | ------------------ |
