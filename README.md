@@ -10,3 +10,4 @@ The following [Seed Labs](https://github.com/seed-labs/seed-labs) related to net
 | [DNS Local](DNS_Local/)                       | [Local DNS Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/DNS/DNS_Local/)                   | :heavy_check_mark: | :x:                |
 | [Firewall](Firewall/)                         | [Firewall Exploration Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/Firewall/)                    |  Partially         | :x:                |               
 | [Kaminsky Attack](DNS_Remote/)                | [The Kaminsky Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/DNS/DNS_Remote/)               | :heavy_check_mark: | :heavy_check_mark: |
+| [DNS Rebinding](DNS_Rebinding/)                | [DNS Rebinding Attack Lab](https://seedsecuritylabs.org/Labs_20.04/Networking/DNS/DNS_Rebinding/)               | :heavy_check_mark: | :heavy_check_mark: |
