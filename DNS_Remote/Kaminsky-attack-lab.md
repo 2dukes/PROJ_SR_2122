@@ -688,4 +688,4 @@ This further proves the success of the attack, since the victim server is answer
   <figcaption style="text-align: center;">Figure 7. Network Configuration</figcaption>
 </figure>
 
-And with that we this lab report.
+And with that we end this lab report.
