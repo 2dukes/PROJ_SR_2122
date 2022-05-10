@@ -185,7 +185,7 @@ ns      IN      A     10.9.0.153
 
 Our goal in this lab is to redirect the user to a machine B when he tries to get to a machine A using A's domain name. This can be done by poisoning the DNS server's cache so that when he requests the address corresponding to A's domain name, it answers with B's address. Overall, that's the entire purpose of the Kaminsky attack itself.
 
-> Implementing the Kaminsky attack all at once is quite challenging, so we break it down into several sub-tasks. In Task 2, we construct the DNS request for a random hostname in the `example.com` domain. In Task 3, we construct a spoofed DNS reply from `example.com`'s nameserver. In Task 4, we put everything together to launch the Kaminsky attack and in Task 5 we verify the impact of the attack.
+> Implementing the Kaminsky attack all at once is quite challenging, so we break it down into several sub-tasks. In Task 2, we construct the DNS request for a random hostname in the `example.com` domain. In Task 3, we construct a spoofed DNS reply from `example.com`'s name server. In Task 4, we put everything together to launch the Kaminsky attack and in Task 5 we verify the impact of the attack.
 
 ## Task 2
 
@@ -444,7 +444,7 @@ with open('ip_resp.bin', 'wb') as f:
 
 In the C program, we load the request packet from the `ip_req.bin` file and response packet from the `ip_resp.bin` file, and use it as our packet template, based on which we create many similar packets, and flood the target local DNS servers with these spoofed replies. For each reply, we change three places: the **transaction ID** and the **prefix name** (prefix.example.com) occurred in two places (the question section and the answer section). The transaction ID is at a fixed place (offset 28 from the beginning of our IP packet), but the offset for the prefix depends on the length of the domain name. We can use a binary editor program, such as bless, to view the binary file `ip.bin` and find the two offsets of the prefix. In our packet, they are at offsets 41 and 64, as mentioned in the lab guidelines. We also edited the authoritative name servers to be the same as the ones for the `example.com` domain. This offset was at 12 from the beginning of the packet, as it can be calculated using the `ipheader` struct provided in the C script. 
 
-So, in an infinite loop, we first generate a random prefix and set the random domain name of the DNS request that will trigger the DNS local server to perform an iterative search to try to fetch the IP address for that random domain and invoke the `send_dns_request` function that will simply send that packet. We also set the random domain for the DNS spoofed reply both in the question and answer field, as mentioned, and invoke the `send_dns_response` function. This function loops through all the 16-bit transaction id values and in each iteration set the different `example.com` legitimate nameservers in the packet and send the two spoofed replies.
+So, in an infinite loop, we first generate a random prefix and set the random domain name of the DNS request that will trigger the DNS local server to perform an iterative search to try to fetch the IP address for that random domain and invoke the `send_dns_request` function that will simply send that packet. We also set the random domain for the DNS spoofed reply both in the question and answer field, as mentioned, and invoke the `send_dns_response` function. This function loops through all the 16-bit transaction id values and in each iteration set the different `example.com` legitimate name servers in the packet and send the two spoofed replies.
 
 The final C script can be seen here:
 
@@ -546,7 +546,7 @@ void send_dns_response(unsigned char *packet, int pkt_size)
   char ns[15] = "199.43.133.53";
   char ns2[15] = "199.43.135.53";
 
-  for (unsigned short id=0;id<65535;id++){
+  for (unsigned short id = 0; id < 65535; id++) {
     // Modify the transaction ID field (offset=28)
     unsigned short id_net_order = htons(id);
     memcpy(packet+28, &id_net_order, 2);

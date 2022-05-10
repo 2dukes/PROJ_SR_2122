@@ -95,7 +95,7 @@ void send_dns_response(unsigned char *packet, int pkt_size)
   char ns[15] = "199.43.133.53";
   char ns2[15] = "199.43.135.53";
 
-  for (unsigned short id=0;id<65535;id++){
+  for (unsigned short id = 0; id < 65535; id++) {
     // Modify the transaction ID field (offset=28)
     unsigned short id_net_order = htons(id);
     memcpy(packet+28, &id_net_order, 2);
